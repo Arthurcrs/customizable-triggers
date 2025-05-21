@@ -1,0 +1,11 @@
+[
+{
+  "modid": "triggerpotioneffects",
+  "name": "Trigger Potion Effects",
+  "description": "Allows the creation of effects that can trigger other effects on various conditions",
+  "version": "1.0.0",
+  "mcversion": "1.12.2",
+  "authorList": ["Mahghuuuls"],
+  "dependencies": []
+}
+]
