@@ -1,7 +1,8 @@
-package triggerpotioneffects;
+package init;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.*;
+import config.PEffectsRecorder;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = TriggerPotionEffectsMod.MODID,
@@ -15,11 +16,11 @@ public class TriggerPotionEffectsMod {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
-    	ModPotions.loadFromConfig(e.getModConfigurationDirectory());
+    	PEffectsRecorder.loadFromConfig(e.getModConfigurationDirectory());
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
-        
+    	
     }
 }
