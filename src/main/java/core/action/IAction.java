@@ -5,5 +5,5 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public interface IAction {
-    void execute(Context ctx);
+	void execute(Context ctx);
 }

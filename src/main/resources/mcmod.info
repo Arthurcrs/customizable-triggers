@@ -1,8 +1,8 @@
 [
 {
-  "modid": "triggerpotioneffects",
-  "name": "Trigger Potion Effects",
-  "description": "Allows the creation of effects that can trigger other effects on various conditions",
+  "modid": "tca",
+  "name": "Trigger Conditions and Actions",
+  "description": "Allows of triggers that perform actions if certain conditions are met",
   "version": "1.0.0",
   "mcversion": "1.12.2",
   "authorList": ["Mahghuuuls"],

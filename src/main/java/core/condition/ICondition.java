@@ -5,5 +5,5 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public interface ICondition {
-    boolean test(Context ctx);
+	boolean test(Context ctx);
 }
