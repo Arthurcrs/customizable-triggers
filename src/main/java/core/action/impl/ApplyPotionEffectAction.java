@@ -2,6 +2,7 @@ package core.action.impl;
 
 import com.google.gson.JsonObject;
 
+import annotation.RegisterAction;
 import core.action.IAction;
 import core.context.Context;
 import core.context.CtxKeys;
@@ -10,13 +11,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 
-/**
- * Applies a PotionEffect to a target entity.
- * 
- * JSON example: { "id": "apply_potion", "potion": "minecraft:speed",
- * "duration": 100, "amplifier": 1, "target": "attacker" // or "victim", or
- * "both" }
- */
+@RegisterAction("apply_potion_effect")
 public final class ApplyPotionEffectAction implements IAction {
 
 	public enum Target {
@@ -51,7 +46,7 @@ public final class ApplyPotionEffectAction implements IAction {
 		}
 
 		if (target == Target.VICTIM || target == Target.BOTH) {
-			give.accept(ctx.get(CtxKeys.VICTIM_OF_ATTACK, EntityLivingBase.class));
+			give.accept(ctx.get(CtxKeys.VICTIM, EntityLivingBase.class));
 		}
 	}
 

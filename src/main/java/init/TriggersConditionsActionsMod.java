@@ -21,9 +21,9 @@ public class TriggersConditionsActionsMod {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
-		ConditionRegistry.registerAll();
-		ActionRegistry.registerAll();
-		TriggerRegistry.registerAll();
+		ConditionRegistry.init();
+		ActionRegistry.init();
+		TriggerRegistry.init();
 
 		try {
 			File configFile = new File(e.getModConfigurationDirectory(), "tca/");
