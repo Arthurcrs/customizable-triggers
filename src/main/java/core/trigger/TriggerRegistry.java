@@ -7,6 +7,7 @@ import java.util.function.BiFunction;
 
 import core.action.IAction;
 import core.condition.ICondition;
+import core.trigger.impl.OnLivingHurtTrigger;
 
 public final class TriggerRegistry {
 
@@ -21,6 +22,10 @@ public final class TriggerRegistry {
 		if (f == null)
 			throw new IllegalArgumentException("Unknown trigger id: " + id);
 		return f.apply(conditions, actions);
+	}
+
+	public static void registerAll() {
+		register(TriggerKeys.ON_LIVING_HURT, OnLivingHurtTrigger::new);
 	}
 
 	private TriggerRegistry() {

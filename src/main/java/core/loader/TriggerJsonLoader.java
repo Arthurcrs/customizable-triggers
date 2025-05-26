@@ -2,6 +2,8 @@ package core.loader;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +25,8 @@ import net.minecraftforge.fml.common.FMLLog;
 public final class TriggerJsonLoader {
 
 	public static List<ITrigger> loadAll(File configDir) {
+		ensureFileExists(configDir);
+
 		File file = new File(configDir, "triggers.json");
 		Gson gson = new Gson();
 
@@ -30,8 +34,8 @@ public final class TriggerJsonLoader {
 			JsonArray root = gson.fromJson(reader, JsonArray.class);
 			List<ITrigger> triggers = new ArrayList<>();
 
-			for (JsonElement el : root) {
-				JsonObject jsonObj = el.getAsJsonObject();
+			for (JsonElement element : root) {
+				JsonObject jsonObj = element.getAsJsonObject();
 
 				List<ICondition> conditions = new ArrayList<>();
 				jsonObj.getAsJsonArray("conditions")
@@ -54,6 +58,25 @@ public final class TriggerJsonLoader {
 		}
 
 		return Collections.emptyList();
+	}
+
+	private static void ensureFileExists(File file) {
+		if (file.exists())
+			return;
+
+		try {
+			File folder = file.getParentFile();
+			if (!folder.exists())
+				folder.mkdirs();
+
+			try (FileWriter writer = new FileWriter(file)) {
+				writer.write("[]");
+			}
+
+			FMLLog.log.info("[TCA] triggers.json not found — created empty config.");
+		} catch (IOException e) {
+			FMLLog.log.error("[TCA] Failed to create empty triggers.json", e);
+		}
 	}
 
 	private TriggerJsonLoader() {

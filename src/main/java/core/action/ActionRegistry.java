@@ -6,6 +6,8 @@ import java.util.function.Function;
 
 import com.google.gson.JsonObject;
 
+import core.action.impl.ApplyPotionEffectAction;
+
 public final class ActionRegistry {
 	private static final Map<String, Function<JsonObject, IAction>> MAP = new HashMap<>();
 
@@ -19,6 +21,10 @@ public final class ActionRegistry {
 		if (f == null)
 			throw new IllegalArgumentException("Unknown action id: " + id);
 		return f.apply(obj);
+	}
+
+	public static void registerAll() {
+		register(ActionKeys.APPLY_POTION_EFFECT, ApplyPotionEffectAction::fromJson);
 	}
 
 	private ActionRegistry() {

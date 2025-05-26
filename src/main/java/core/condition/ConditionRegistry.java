@@ -6,6 +6,8 @@ import java.util.function.Function;
 
 import com.google.gson.JsonObject;
 
+import core.condition.impl.AttackerIsPlayerCondition;
+
 public final class ConditionRegistry {
 	private static final Map<String, Function<JsonObject, ICondition>> MAP = new HashMap<>();
 
@@ -19,6 +21,10 @@ public final class ConditionRegistry {
 		if (f == null)
 			throw new IllegalArgumentException("Unknown condition id: " + id);
 		return f.apply(obj);
+	}
+
+	public static void registerAll() {
+		register(ConditionKeys.ATTACKER_IS_PLAYER, obj -> new AttackerIsPlayerCondition());
 	}
 
 	private ConditionRegistry() {
