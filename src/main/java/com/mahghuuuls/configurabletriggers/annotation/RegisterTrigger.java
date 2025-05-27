@@ -1,4 +1,4 @@
-package com.mahghuuuls.tca.annotation;
+package com.mahghuuuls.configurabletriggers.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

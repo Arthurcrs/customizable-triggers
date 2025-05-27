@@ -1,4 +1,4 @@
-package com.mahghuuuls.tca.core.context;
+package com.mahghuuuls.configurabletriggers.core.context;
 
 public final class CtxKeys {
 	public static final String PLAYER = "player";

@@ -1,13 +1,13 @@
-package com.mahghuuuls.tca.core.trigger.impl;
+package com.mahghuuuls.configurabletriggers.core.trigger.impl;
 
 import java.util.List;
 
-import com.mahghuuuls.tca.annotation.RegisterTrigger;
-import com.mahghuuuls.tca.core.action.IAction;
-import com.mahghuuuls.tca.core.condition.ICondition;
-import com.mahghuuuls.tca.core.context.Context;
-import com.mahghuuuls.tca.core.context.CtxKeys;
-import com.mahghuuuls.tca.core.trigger.Trigger;
+import com.mahghuuuls.configurabletriggers.annotation.RegisterTrigger;
+import com.mahghuuuls.configurabletriggers.core.action.IAction;
+import com.mahghuuuls.configurabletriggers.core.condition.ICondition;
+import com.mahghuuuls.configurabletriggers.core.context.Context;
+import com.mahghuuuls.configurabletriggers.core.context.CtxKeys;
+import com.mahghuuuls.configurabletriggers.core.trigger.Trigger;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -16,8 +16,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @RegisterTrigger("on_living_hurt")
 public final class OnLivingHurtTrigger extends Trigger {
 
-	public OnLivingHurtTrigger(List<ICondition> conditions, List<IAction> actions) {
-		super(conditions, actions);
+	public OnLivingHurtTrigger(String name, List<ICondition> conditions, List<IAction> actions) {
+		super(name, conditions, actions);
 	}
 
 	@Override

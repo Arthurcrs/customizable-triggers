@@ -1,6 +1,6 @@
-package com.mahghuuuls.tca.core.action;
+package com.mahghuuuls.configurabletriggers.core.action;
 
-import com.mahghuuuls.tca.core.context.Context;
+import com.mahghuuuls.configurabletriggers.core.context.Context;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,4 +1,4 @@
-package com.mahghuuuls.tca.core.trigger;
+package com.mahghuuuls.configurabletriggers.core.trigger;
 
 public interface ITrigger {
 	void register();

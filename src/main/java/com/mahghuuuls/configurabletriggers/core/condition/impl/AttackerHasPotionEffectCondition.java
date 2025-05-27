@@ -1,10 +1,10 @@
-package com.mahghuuuls.tca.core.condition.impl;
+package com.mahghuuuls.configurabletriggers.core.condition.impl;
 
 import com.google.gson.JsonObject;
-import com.mahghuuuls.tca.annotation.RegisterCondition;
-import com.mahghuuuls.tca.core.condition.ICondition;
-import com.mahghuuuls.tca.core.context.Context;
-import com.mahghuuuls.tca.core.context.CtxKeys;
+import com.mahghuuuls.configurabletriggers.annotation.RegisterCondition;
+import com.mahghuuuls.configurabletriggers.core.condition.ICondition;
+import com.mahghuuuls.configurabletriggers.core.context.Context;
+import com.mahghuuuls.configurabletriggers.core.context.CtxKeys;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;

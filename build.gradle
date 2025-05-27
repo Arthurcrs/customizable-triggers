@@ -46,7 +46,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "triggersConditionsActions",
+            "Specification-Title": "configurable-triggers",
             "Specification-Vendor": "Mahghuuuls",
             "Specification-Version": "1",
             "Implementation-Title": project.name,

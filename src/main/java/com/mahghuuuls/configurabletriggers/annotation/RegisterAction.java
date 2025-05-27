@@ -1,4 +1,4 @@
-package com.mahghuuuls.tca.annotation;
+package com.mahghuuuls.configurabletriggers.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface RegisterCondition {
+public @interface RegisterAction {
 	String value(); // JSON id
 }

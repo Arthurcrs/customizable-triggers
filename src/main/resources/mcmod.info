@@ -1,7 +1,7 @@
 [
 {
-  "modid": "tca",
-  "name": "Trigger Conditions and Actions",
+  "modid": "configurable-triggers",
+  "name": "Configurable Triggers",
   "description": "Allows of triggers that perform actions if certain conditions are met",
   "version": "1.0.0",
   "mcversion": "1.12.2",

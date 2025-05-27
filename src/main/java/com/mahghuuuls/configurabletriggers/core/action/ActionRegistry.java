@@ -1,4 +1,4 @@
-package com.mahghuuuls.tca.core.action;
+package com.mahghuuuls.configurabletriggers.core.action;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -9,13 +9,13 @@ import java.util.function.Function;
 import org.reflections.Reflections;
 
 import com.google.gson.JsonObject;
-import com.mahghuuuls.tca.annotation.RegisterAction;
+import com.mahghuuuls.configurabletriggers.annotation.RegisterAction;
 
 public final class ActionRegistry {
 	private static final Map<String, Function<JsonObject, IAction>> MAP = new HashMap<>();
 
 	public static void init() {
-		Reflections refs = new Reflections("com.mahghuuuls.tca.core.action.impl");
+		Reflections refs = new Reflections("com.mahghuuuls.configurabletriggers.core.action.impl");
 		Set<Class<?>> actions = refs.getTypesAnnotatedWith(RegisterAction.class);
 
 		for (Class<?> cls : actions) {
@@ -27,11 +27,11 @@ public final class ActionRegistry {
 					try {
 						return (IAction) fromJson.invoke(null, json);
 					} catch (Exception e) {
-						throw new RuntimeException("Failed to create action: " + cls, e);
+						throw new RuntimeException("[Configurable Triggers] Failed to create action: " + cls, e);
 					}
 				});
 			} catch (NoSuchMethodException e) {
-				throw new RuntimeException("Missing fromJson in " + cls, e);
+				throw new RuntimeException("[Configurable Triggers] Missing fromJson in " + cls, e);
 			}
 		}
 	}
@@ -40,7 +40,7 @@ public final class ActionRegistry {
 		String id = obj.get("id").getAsString();
 		Function<JsonObject, IAction> f = MAP.get(id);
 		if (f == null)
-			throw new IllegalArgumentException("Unknown action id: " + id);
+			throw new IllegalArgumentException("[Configurable Triggers] Unknown action id: " + id);
 		return f.apply(obj);
 	}
 }

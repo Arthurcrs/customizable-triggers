@@ -1,4 +1,4 @@
-package com.mahghuuuls.tca.core.context;
+package com.mahghuuuls.configurabletriggers.core.context;
 
 import java.util.Collections;
 import java.util.HashMap;
