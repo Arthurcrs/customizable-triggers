@@ -11,6 +11,7 @@ import org.reflections.Reflections;
 import com.mahghuuuls.configurabletriggers.annotation.RegisterTrigger;
 import com.mahghuuuls.configurabletriggers.core.action.IAction;
 import com.mahghuuuls.configurabletriggers.core.condition.ICondition;
+import com.mahghuuuls.configurabletriggers.util.CTLogger;
 
 public final class TriggerRegistry {
 
@@ -29,14 +30,16 @@ public final class TriggerRegistry {
 					try {
 						return (ITrigger) ctor.newInstance(name, conds, acts);
 					} catch (Exception e) {
-						throw new RuntimeException("[Configurable Triggers] Failed to instantiate trigger: " + cls, e);
+						CTLogger.error("Failed to instantiate trigger '{}' of class '{}'", name, cls, e);
+						return null;
 					}
 				});
 			} catch (NoSuchMethodException e) {
-				throw new RuntimeException(
-						"[Configurable Triggers] Missing constructor (String, List<ICondition>, List<IAction>) in "
-								+ cls,
-						e);
+				CTLogger.error(
+						"Trigger class '{}' is missing the required constructor (String, List<ICondition>, List<IAction>)",
+						cls.getName(), e);
+			} catch (Exception e) {
+				CTLogger.error("Unexpected error while registering trigger '{}'", triggerEvent, e);
 			}
 		}
 	}
@@ -49,7 +52,7 @@ public final class TriggerRegistry {
 			List<IAction> actions) {
 		TriggerFactory triggerFactory = MAP.get(triggerEvent);
 		if (triggerFactory == null)
-			throw new IllegalArgumentException("[Configurable Triggers] Unknown trigger id: " + triggerEvent);
+			throw new IllegalArgumentException("Unknown trigger id: " + triggerEvent);
 		return triggerFactory.create(name, conditions, actions);
 	}
 

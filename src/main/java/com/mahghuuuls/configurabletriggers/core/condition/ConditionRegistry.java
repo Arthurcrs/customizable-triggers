@@ -10,6 +10,7 @@ import org.reflections.Reflections;
 
 import com.google.gson.JsonObject;
 import com.mahghuuuls.configurabletriggers.annotation.RegisterCondition;
+import com.mahghuuuls.configurabletriggers.util.CTLogger;
 
 public final class ConditionRegistry {
 	private static final Map<String, Function<JsonObject, ICondition>> MAP = new HashMap<>();
@@ -39,8 +40,10 @@ public final class ConditionRegistry {
 	public static ICondition fromJson(JsonObject jsonObj) {
 		String id = jsonObj.get("id").getAsString();
 		Function<JsonObject, ICondition> factory = MAP.get(id);
-		if (factory == null)
-			throw new IllegalArgumentException("[Configurable Triggers] Unknown condition id: " + id);
+		if (factory == null) {
+			CTLogger.error("Unknown condition ID '{}' in config: {}", id, jsonObj);
+			throw new IllegalArgumentException("Unknown condition id: " + id);
+		}
 
 		ICondition base = factory.apply(jsonObj);
 

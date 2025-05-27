@@ -19,8 +19,7 @@ import com.mahghuuuls.configurabletriggers.core.condition.ConditionRegistry;
 import com.mahghuuuls.configurabletriggers.core.condition.ICondition;
 import com.mahghuuuls.configurabletriggers.core.trigger.ITrigger;
 import com.mahghuuuls.configurabletriggers.core.trigger.TriggerRegistry;
-
-import net.minecraftforge.fml.common.FMLLog;
+import com.mahghuuuls.configurabletriggers.util.CTLogger;
 
 public final class TriggerJsonLoader {
 
@@ -54,9 +53,9 @@ public final class TriggerJsonLoader {
 			return triggers;
 
 		} catch (JsonSyntaxException e) {
-			FMLLog.log.error("[Configurable Triggers] Malformed JSON in triggers.json", e);
+			CTLogger.error("Malformed JSON in triggers.json", e);
 		} catch (Exception e) {
-			FMLLog.log.error("[Configurable Triggers] Failed to load triggers.json", e);
+			CTLogger.error("Failed to load triggers.json", e);
 		}
 
 		return Collections.emptyList();
@@ -71,9 +70,9 @@ public final class TriggerJsonLoader {
 		if (!file.exists()) {
 			try (FileWriter writer = new FileWriter(file)) {
 				writer.write("[]");
-				FMLLog.log.info("[Configurable Triggers] triggers.json not found — created empty config at {}", file);
+				CTLogger.info("Triggers.json not found — created empty config at {}", file);
 			} catch (IOException e) {
-				FMLLog.log.error("[Configurable Triggers] Failed to create empty triggers.json", e);
+				CTLogger.error("Failed to create empty triggers.json", e);
 			}
 		}
 

@@ -7,8 +7,8 @@ import com.mahghuuuls.configurabletriggers.core.action.ActionRegistry;
 import com.mahghuuuls.configurabletriggers.core.condition.ConditionRegistry;
 import com.mahghuuuls.configurabletriggers.core.trigger.ITrigger;
 import com.mahghuuuls.configurabletriggers.core.trigger.TriggerRegistry;
+import com.mahghuuuls.configurabletriggers.util.CTLogger;
 
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -21,6 +21,7 @@ public class ConfigurableTriggersMod {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
+
 		ConditionRegistry.init();
 		ActionRegistry.init();
 		TriggerRegistry.init();
@@ -30,7 +31,7 @@ public class ConfigurableTriggersMod {
 			List<ITrigger> triggers = TriggerJsonLoader.loadAll(triggersJsonFile);
 			triggers.forEach(ITrigger::register);
 		} catch (Exception ex) {
-			FMLLog.log.error("[Configurable Triggers] Failed to load triggers.json", ex);
+			CTLogger.error("Failed to load triggers.json", ex);
 		}
 	}
 
