@@ -1,11 +1,11 @@
-package core.action.impl;
+package com.mahghuuuls.tca.core.action.impl;
 
 import com.google.gson.JsonObject;
+import com.mahghuuuls.tca.annotation.RegisterAction;
+import com.mahghuuuls.tca.core.action.IAction;
+import com.mahghuuuls.tca.core.context.Context;
+import com.mahghuuuls.tca.core.context.CtxKeys;
 
-import annotation.RegisterAction;
-import core.action.IAction;
-import core.context.Context;
-import core.context.CtxKeys;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;

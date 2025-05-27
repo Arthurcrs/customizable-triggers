@@ -1,6 +1,7 @@
-package core.action;
+package com.mahghuuuls.tca.core.action;
 
-import core.context.Context;
+import com.mahghuuuls.tca.core.context.Context;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 

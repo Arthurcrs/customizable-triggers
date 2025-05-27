@@ -1,13 +1,13 @@
-package init;
+package com.mahghuuuls.tca.init;
 
 import java.io.File;
 import java.util.List;
 
-import core.action.ActionRegistry;
-import core.condition.ConditionRegistry;
-import core.loader.TriggerJsonLoader;
-import core.trigger.ITrigger;
-import core.trigger.TriggerRegistry;
+import com.mahghuuuls.tca.core.action.ActionRegistry;
+import com.mahghuuuls.tca.core.condition.ConditionRegistry;
+import com.mahghuuuls.tca.core.trigger.ITrigger;
+import com.mahghuuuls.tca.core.trigger.TriggerRegistry;
+
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

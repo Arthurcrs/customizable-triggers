@@ -1,4 +1,4 @@
-package core.action;
+package com.mahghuuuls.tca.core.action;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -9,14 +9,13 @@ import java.util.function.Function;
 import org.reflections.Reflections;
 
 import com.google.gson.JsonObject;
-
-import annotation.RegisterAction;
+import com.mahghuuuls.tca.annotation.RegisterAction;
 
 public final class ActionRegistry {
 	private static final Map<String, Function<JsonObject, IAction>> MAP = new HashMap<>();
 
 	public static void init() {
-		Reflections refs = new Reflections("core.action.impl");
+		Reflections refs = new Reflections("com.mahghuuuls.tca.core.action.impl");
 		Set<Class<?>> actions = refs.getTypesAnnotatedWith(RegisterAction.class);
 
 		for (Class<?> cls : actions) {

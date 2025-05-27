@@ -1,4 +1,4 @@
-package core.trigger;
+package com.mahghuuuls.tca.core.trigger;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -9,16 +9,16 @@ import java.util.function.BiFunction;
 
 import org.reflections.Reflections;
 
-import annotation.RegisterTrigger;
-import core.action.IAction;
-import core.condition.ICondition;
+import com.mahghuuuls.tca.annotation.RegisterTrigger;
+import com.mahghuuuls.tca.core.action.IAction;
+import com.mahghuuuls.tca.core.condition.ICondition;
 
 public final class TriggerRegistry {
 
 	private static final Map<String, BiFunction<List<ICondition>, List<IAction>, ITrigger>> MAP = new HashMap<>();
 
 	public static void init() {
-		Reflections refs = new Reflections("core.trigger.impl");
+		Reflections refs = new Reflections("com.mahghuuuls.tca.core.trigger.impl");
 		Set<Class<?>> classes = refs.getTypesAnnotatedWith(RegisterTrigger.class);
 
 		for (Class<?> cls : classes) {

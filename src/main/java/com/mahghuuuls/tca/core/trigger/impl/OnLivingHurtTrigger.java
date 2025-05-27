@@ -1,13 +1,14 @@
-package core.trigger.impl;
+package com.mahghuuuls.tca.core.trigger.impl;
 
 import java.util.List;
 
-import annotation.RegisterTrigger;
-import core.action.IAction;
-import core.condition.ICondition;
-import core.context.Context;
-import core.context.CtxKeys;
-import core.trigger.Trigger;
+import com.mahghuuuls.tca.annotation.RegisterTrigger;
+import com.mahghuuuls.tca.core.action.IAction;
+import com.mahghuuuls.tca.core.condition.ICondition;
+import com.mahghuuuls.tca.core.context.Context;
+import com.mahghuuuls.tca.core.context.CtxKeys;
+import com.mahghuuuls.tca.core.trigger.Trigger;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

@@ -1,4 +1,4 @@
-package core.loader;
+package com.mahghuuuls.tca.init;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,13 +13,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mahghuuuls.tca.core.action.ActionRegistry;
+import com.mahghuuuls.tca.core.action.IAction;
+import com.mahghuuuls.tca.core.condition.ConditionRegistry;
+import com.mahghuuuls.tca.core.condition.ICondition;
+import com.mahghuuuls.tca.core.trigger.ITrigger;
+import com.mahghuuuls.tca.core.trigger.TriggerRegistry;
 
-import core.action.ActionRegistry;
-import core.action.IAction;
-import core.condition.ConditionRegistry;
-import core.condition.ICondition;
-import core.trigger.ITrigger;
-import core.trigger.TriggerRegistry;
 import net.minecraftforge.fml.common.FMLLog;
 
 public final class TriggerJsonLoader {

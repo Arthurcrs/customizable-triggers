@@ -1,4 +1,4 @@
-package core.condition;
+package com.mahghuuuls.tca.core.condition;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -9,14 +9,13 @@ import java.util.function.Function;
 import org.reflections.Reflections;
 
 import com.google.gson.JsonObject;
-
-import annotation.RegisterCondition;
+import com.mahghuuuls.tca.annotation.RegisterCondition;
 
 public final class ConditionRegistry {
 	private static final Map<String, Function<JsonObject, ICondition>> MAP = new HashMap<>();
 
 	public static void init() {
-		Reflections refs = new Reflections("core.condition.impl");
+		Reflections refs = new Reflections("com.mahghuuuls.tca.core.condition.impl");
 		Set<Class<?>> classes = refs.getTypesAnnotatedWith(RegisterCondition.class);
 
 		for (Class<?> cls : classes) {
@@ -37,12 +36,21 @@ public final class ConditionRegistry {
 		}
 	}
 
-	public static ICondition fromJson(JsonObject obj) {
-		String id = obj.get("id").getAsString();
-		Function<JsonObject, ICondition> f = MAP.get(id);
-		if (f == null)
+	public static ICondition fromJson(JsonObject jsonObj) {
+		String id = jsonObj.get("id").getAsString();
+		Function<JsonObject, ICondition> factory = MAP.get(id);
+		if (factory == null)
 			throw new IllegalArgumentException("Unknown condition id: " + id);
-		return f.apply(obj);
+
+		ICondition base = factory.apply(jsonObj);
+
+		boolean expected = jsonObj.has("value") ? jsonObj.get("value").getAsBoolean() : true;
+
+		if (!expected) {
+			return ctx -> !base.test(ctx);
+		}
+
+		return base;
 	}
 
 	private ConditionRegistry() {

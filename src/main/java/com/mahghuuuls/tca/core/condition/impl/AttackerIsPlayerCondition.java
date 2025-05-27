@@ -1,11 +1,11 @@
-package core.condition.impl;
+package com.mahghuuuls.tca.core.condition.impl;
 
 import com.google.gson.JsonObject;
+import com.mahghuuuls.tca.annotation.RegisterCondition;
+import com.mahghuuuls.tca.core.condition.ICondition;
+import com.mahghuuuls.tca.core.context.Context;
+import com.mahghuuuls.tca.core.context.CtxKeys;
 
-import annotation.RegisterCondition;
-import core.condition.ICondition;
-import core.context.Context;
-import core.context.CtxKeys;
 import net.minecraft.entity.player.EntityPlayer;
 
 @RegisterCondition("attacker_is_player")

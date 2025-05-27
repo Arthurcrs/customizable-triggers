@@ -1,10 +1,10 @@
-package core.trigger;
-
-import core.action.IAction;
-import core.condition.ICondition;
-import core.context.Context;
+package com.mahghuuuls.tca.core.trigger;
 
 import java.util.List;
+
+import com.mahghuuuls.tca.core.action.IAction;
+import com.mahghuuuls.tca.core.condition.ICondition;
+import com.mahghuuuls.tca.core.context.Context;
 
 public abstract class Trigger implements ITrigger {
 	protected final List<ICondition> conditions;
