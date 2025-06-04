@@ -1,4 +1,4 @@
-package com.mahghuuuls.configurabletriggers.core.trigger;
+package com.mahghuuuls.configurabletriggers.core.registry;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -11,6 +11,8 @@ import org.reflections.Reflections;
 import com.mahghuuuls.configurabletriggers.annotation.RegisterTrigger;
 import com.mahghuuuls.configurabletriggers.core.action.IAction;
 import com.mahghuuuls.configurabletriggers.core.condition.ICondition;
+import com.mahghuuuls.configurabletriggers.core.trigger.ITrigger;
+import com.mahghuuuls.configurabletriggers.core.trigger.TriggerFactory;
 import com.mahghuuuls.configurabletriggers.util.CTLogger;
 
 public final class TriggerRegistry {

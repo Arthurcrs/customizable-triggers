@@ -1,4 +1,4 @@
-package com.mahghuuuls.configurabletriggers.core.condition;
+package com.mahghuuuls.configurabletriggers.core.registry;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import org.reflections.Reflections;
 
 import com.google.gson.JsonObject;
 import com.mahghuuuls.configurabletriggers.annotation.RegisterCondition;
+import com.mahghuuuls.configurabletriggers.core.condition.ICondition;
 import com.mahghuuuls.configurabletriggers.util.CTLogger;
 
 public final class ConditionRegistry {

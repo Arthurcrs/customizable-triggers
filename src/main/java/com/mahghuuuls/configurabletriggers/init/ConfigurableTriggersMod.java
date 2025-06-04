@@ -3,10 +3,10 @@ package com.mahghuuuls.configurabletriggers.init;
 import java.io.File;
 import java.util.List;
 
-import com.mahghuuuls.configurabletriggers.core.action.ActionRegistry;
-import com.mahghuuuls.configurabletriggers.core.condition.ConditionRegistry;
+import com.mahghuuuls.configurabletriggers.core.registry.ActionRegistry;
+import com.mahghuuuls.configurabletriggers.core.registry.ConditionRegistry;
+import com.mahghuuuls.configurabletriggers.core.registry.TriggerRegistry;
 import com.mahghuuuls.configurabletriggers.core.trigger.ITrigger;
-import com.mahghuuuls.configurabletriggers.core.trigger.TriggerRegistry;
 import com.mahghuuuls.configurabletriggers.util.CTLogger;
 
 import net.minecraftforge.fml.common.Mod;

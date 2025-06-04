@@ -1,4 +1,4 @@
-package com.mahghuuuls.configurabletriggers.core.action;
+package com.mahghuuuls.configurabletriggers.core.registry;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import org.reflections.Reflections;
 
 import com.google.gson.JsonObject;
 import com.mahghuuuls.configurabletriggers.annotation.RegisterAction;
+import com.mahghuuuls.configurabletriggers.core.action.IAction;
 
 public final class ActionRegistry {
 	private static final Map<String, Function<JsonObject, IAction>> MAP = new HashMap<>();

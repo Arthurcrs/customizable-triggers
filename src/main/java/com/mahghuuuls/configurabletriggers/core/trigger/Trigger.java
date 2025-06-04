@@ -5,6 +5,7 @@ import java.util.List;
 import com.mahghuuuls.configurabletriggers.core.action.IAction;
 import com.mahghuuuls.configurabletriggers.core.condition.ICondition;
 import com.mahghuuuls.configurabletriggers.core.context.Context;
+import com.mahghuuuls.configurabletriggers.util.CTLogger;
 
 public abstract class Trigger implements ITrigger {
 
@@ -26,15 +27,25 @@ public abstract class Trigger implements ITrigger {
 
 	private boolean testAll(Context ctx) {
 		for (ICondition condition : conditions) {
-			if (!condition.test(ctx))
+			try {
+				if (!condition.test(ctx))
+					return false;
+			} catch (Exception ex) {
+				CTLogger.error("Condition {} in trigger {} failed to execute due to an error", condition, this.name,
+						ex);
 				return false;
+			}
 		}
 		return true;
 	}
 
 	private void executeAll(Context ctx) {
 		for (IAction action : actions) {
-			action.execute(ctx);
+			try {
+				action.execute(ctx);
+			} catch (Exception ex) {
+				CTLogger.error("Action {} in trigger {} failed to execute due to an error", action, this.name, ex);
+			}
 		}
 	}
 
