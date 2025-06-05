@@ -9,6 +9,7 @@ import com.mahghuuuls.configurabletriggers.core.context.Context;
 import com.mahghuuuls.configurabletriggers.core.context.CtxKeys;
 import com.mahghuuuls.configurabletriggers.core.trigger.Trigger;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -35,9 +36,23 @@ public final class OnLivingHurtTrigger extends Trigger {
 		if (evt.getEntity().world.isRemote)
 			return;
 
-		Context ctx = Context.builder().put(CtxKeys.VICTIM, evt.getEntityLiving())
-				.put(CtxKeys.ATTACKER, evt.getSource().getTrueSource()).build();
+		Object attacker = evt.getSource().getTrueSource();
 
+		Context.Builder ctxBuilder = Context.builder();
+
+		ctxBuilder.put(CtxKeys.DAMAGED_ENTITY, evt.getEntityLiving());
+		ctxBuilder.put(CtxKeys.DAMAGE_AMOUNT, evt.getAmount());
+		ctxBuilder.put(CtxKeys.DAMAGE_TYPE, evt.getSource().getDamageType());
+		ctxBuilder.put(CtxKeys.TRUE_SOURCE, evt.getSource().getTrueSource()); // The skeleton
+		ctxBuilder.put(CtxKeys.IMMEDIATE_SOURCE, evt.getSource().getImmediateSource()); // The arrow
+
+		if (attacker instanceof EntityLivingBase) {
+			EntityLivingBase livingAttacker = (EntityLivingBase) attacker;
+			ctxBuilder.put(CtxKeys.ATTACK_WEAPON, livingAttacker.getHeldItemMainhand());
+			ctxBuilder.put(CtxKeys.ATTACKER_ENTITY_ID, livingAttacker.getEntityId());
+		}
+
+		Context ctx = ctxBuilder.build();
 		run(ctx);
 	}
 }

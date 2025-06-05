@@ -14,20 +14,22 @@ import net.minecraft.util.ResourceLocation;
 public final class AttackerHasPotionEffectCondition implements ICondition {
 	private final Potion potion;
 
+	private static final String FIELD_EFFECT = "effect";
+
 	public AttackerHasPotionEffectCondition(Potion potionEffect) {
 		this.potion = potionEffect;
 	}
 
 	@Override
 	public boolean test(Context ctx) {
-		EntityLivingBase attacker = ctx.get(CtxKeys.ATTACKER, EntityLivingBase.class);
+		EntityLivingBase attacker = ctx.get(CtxKeys.TRUE_SOURCE, EntityLivingBase.class);
 		if (attacker == null || potion == null)
 			return false;
 		return attacker.getActivePotionEffect(potion) != null;
 	}
 
 	public static AttackerHasPotionEffectCondition fromJson(JsonObject obj) {
-		String effectName = obj.get("effect").getAsString();
+		String effectName = obj.get(FIELD_EFFECT).getAsString();
 		Potion potionEffect = Potion.REGISTRY.getObject(new ResourceLocation(effectName));
 		return new AttackerHasPotionEffectCondition(potionEffect);
 	}

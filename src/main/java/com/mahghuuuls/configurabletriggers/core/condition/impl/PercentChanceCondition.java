@@ -11,9 +11,11 @@ import com.mahghuuuls.configurabletriggers.core.context.Context;
 public final class PercentChanceCondition implements ICondition {
 	private final double percentChance;
 
+	private final static String FIELD_CHANCE = "chance";
+
 	public PercentChanceCondition(double chance) {
 		if (chance < 0 || chance > 100) {
-			throw new IllegalArgumentException("'chance' must be between 0 and 100");
+			throw new IllegalArgumentException(FIELD_CHANCE + " must be between 0 and 100");
 		}
 		this.percentChance = chance;
 	}
@@ -25,10 +27,10 @@ public final class PercentChanceCondition implements ICondition {
 	}
 
 	public static PercentChanceCondition fromJson(JsonObject obj) {
-		if (!obj.has("chance")) {
-			throw new IllegalArgumentException("Condition 'percent_chance' is missing required field 'chance'");
+		if (!obj.has(FIELD_CHANCE)) {
+			throw new IllegalArgumentException("Condition is missing required field " + FIELD_CHANCE);
 		}
-		double percentChance = obj.get("chance").getAsDouble();
+		double percentChance = obj.get(FIELD_CHANCE).getAsDouble();
 		return new PercentChanceCondition(percentChance);
 	}
 }

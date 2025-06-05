@@ -54,7 +54,7 @@ public final class TriggerRegistry {
 			List<IAction> actions) {
 		TriggerFactory triggerFactory = MAP.get(triggerEvent);
 		if (triggerFactory == null)
-			throw new IllegalArgumentException("Unknown trigger id: " + triggerEvent);
+			CTLogger.error("Unknown trigger id: " + triggerEvent);
 		return triggerFactory.create(name, conditions, actions);
 	}
 

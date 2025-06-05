@@ -13,7 +13,7 @@ public final class AttackerIsPlayerCondition implements ICondition {
 
 	@Override
 	public boolean test(Context ctx) {
-		return ctx.get(CtxKeys.ATTACKER, Object.class) instanceof EntityPlayer;
+		return ctx.get(CtxKeys.TRUE_SOURCE, Object.class) instanceof EntityPlayer;
 	}
 
 	public static AttackerIsPlayerCondition fromJson(JsonObject obj) {

@@ -1,9 +1,19 @@
 package com.mahghuuuls.configurabletriggers.core.context;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+
 public final class CtxKeys {
-	public static final String PLAYER = "player";
-	public static final String VICTIM = "victim";
-	public static final String ATTACKER = "attacker";
+	public static final CtxKey<EntityPlayer> PLAYER = new CtxKey<>("player");
+	public static final CtxKey<EntityLivingBase> DAMAGED_ENTITY = new CtxKey<>("victim");
+	public static final CtxKey<Object> TRUE_SOURCE = new CtxKey<>("attacker");
+	public static final CtxKey<ItemStack> ATTACK_WEAPON = new CtxKey<>("attack_weapon");
+	public static final CtxKey<Float> DAMAGE_AMOUNT = new CtxKey<>("damage");
+	public static final CtxKey<String> DAMAGE_TYPE = new CtxKey<>("damage_type");
+	public static final CtxKey<Integer> ATTACKER_ENTITY_ID = new CtxKey<>("attacker_entity_id");
+	public static final CtxKey<Integer> VICTIM_ENTITY_ID = new CtxKey<>("victim_entity_id");
+	public static final CtxKey<Object> IMMEDIATE_SOURCE = new CtxKey<>("immediate_source");
 
 	private CtxKeys() {
 	}

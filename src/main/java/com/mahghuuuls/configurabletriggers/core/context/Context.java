@@ -6,30 +6,32 @@ import java.util.Map;
 
 public final class Context {
 
-    private final Map<String, ?> data;
+	private final Map<CtxKey<?>, ?> data;
 
-    private Context(Map<String, ?> data) {
-        this.data = data;
-    }
+	private Context(Map<CtxKey<?>, ?> data) {
+		this.data = data;
+	}
 
-    public static Builder builder() {
-        return new Builder();
-    }
+	public static Builder builder() {
+		return new Builder();
+	}
 
-    public static final class Builder {
-        private final Map<String, Object> mutable = new HashMap<>();
+	public static final class Builder {
+		private final Map<CtxKey<?>, Object> mutable = new HashMap<>();
 
-        public Builder put(String key, Object value) {
-            mutable.put(key, value);
-            return this;
-        }
+		public <T> Builder put(CtxKey<T> key, T value) {
+			mutable.put(key, value);
+			return this;
+		}
 
-        public Context build() {
-            return new Context(Collections.unmodifiableMap(new HashMap<>(mutable)));
-        }
-    }
-    
-    public <T> T get(String key, Class<T> type) {
-        return type.cast(data.get(key));
-    }
+		public Context build() {
+			return new Context(Collections.unmodifiableMap(new HashMap<>(mutable)));
+		}
+	}
+
+	public <T> T get(CtxKey<?> key, Class<T> type) {
+		@SuppressWarnings("unchecked")
+		T value = (T) data.get(key);
+		return value;
+	}
 }
