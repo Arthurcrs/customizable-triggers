@@ -34,8 +34,8 @@ public final class TriggerRegistry {
 	/**
 	 * Initializes the TriggerRegistry by scanning the classpath for classes
 	 * annotated with {@link RegisterTrigger}. For each discovered class, it
-	 * attempts to find a constructor matching (String, List<ICondition>,
-	 * List<IAction>) and registers a {@link TriggerFactory} for it.
+	 * attempts to find a constructor matching (String, {@code List<ICondition>},
+	 * {@code List<IAction>}) and registers a {@link TriggerFactory} for it.
 	 *
 	 * <p>
 	 * This method should be called once during the mod's pre-initialization phase.
