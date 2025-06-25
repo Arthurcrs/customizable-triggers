@@ -1,11 +1,10 @@
 package com.mahghuuuls.configurabletriggers.core.action.impl;
 
-import java.util.function.Consumer;
-
 import com.google.gson.JsonObject;
 import com.mahghuuuls.configurabletriggers.annotation.RegisterAction;
 import com.mahghuuuls.configurabletriggers.core.action.IAction;
 import com.mahghuuuls.configurabletriggers.core.context.Context;
+import com.mahghuuuls.configurabletriggers.core.context.CtxKey;
 import com.mahghuuuls.configurabletriggers.core.context.CtxKeys;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -16,25 +15,21 @@ import net.minecraft.util.ResourceLocation;
 @RegisterAction("apply_potion_effect")
 public final class ApplyPotionEffectAction implements IAction {
 
-	public enum Target {
-		ATTACKER, VICTIM, BOTH
-	}
-
 	private final Potion potion;
 	private final int duration;
 	private final int amplifier;
-	private final Target target;
+	private final CtxKey<?> entityKey;
 
-	private final static String FIELD_TARGET = "target";
+	private final static String FIELD_ENTITY = "entity";
 	private final static String FIELD_AMPLIFIER = "amplifier";
 	private final static String FIELD_DURATION = "duration";
 	private final static String FIELD_POTION = "potion";
 
-	public ApplyPotionEffectAction(Potion potion, int duration, int amplifier, Target target) {
+	public ApplyPotionEffectAction(Potion potion, int duration, int amplifier, CtxKey<?> key) {
 		this.potion = potion;
 		this.duration = duration;
 		this.amplifier = amplifier;
-		this.target = target;
+		this.entityKey = key;
 	}
 
 	@Override
@@ -42,28 +37,44 @@ public final class ApplyPotionEffectAction implements IAction {
 		if (potion == null)
 			return;
 
-		Consumer<EntityLivingBase> give = entity -> {
-			if (entity != null && !entity.world.isRemote) {
-				entity.addPotionEffect(new PotionEffect(potion, duration, amplifier));
-			}
-		};
-
-		if (target == Target.ATTACKER || target == Target.BOTH) {
-			give.accept(ctx.get(CtxKeys.TRUE_SOURCE, EntityLivingBase.class));
-		}
-
-		if (target == Target.VICTIM || target == Target.BOTH) {
-			give.accept(ctx.get(CtxKeys.DAMAGED_ENTITY, EntityLivingBase.class));
+		EntityLivingBase entity = ctx.get(entityKey, EntityLivingBase.class);
+		if (entity != null && !entity.world.isRemote) {
+			entity.addPotionEffect(new PotionEffect(potion, duration, amplifier));
 		}
 	}
 
 	public static ApplyPotionEffectAction fromJson(JsonObject obj) {
+
+		if (!obj.has(FIELD_ENTITY)) {
+			throw new IllegalArgumentException("Action is missing required field " + FIELD_ENTITY);
+		}
+
+		if (!obj.has(FIELD_DURATION)) {
+			throw new IllegalArgumentException("Action is missing required field " + FIELD_DURATION);
+		}
+
+		if (!obj.has(FIELD_POTION)) {
+			throw new IllegalArgumentException("Action is missing required field " + FIELD_POTION);
+		}
+
 		Potion potion = Potion.REGISTRY.getObject(new ResourceLocation(obj.get(FIELD_POTION).getAsString()));
 		int duration = obj.get(FIELD_DURATION).getAsInt();
 		int amplifier = obj.has(FIELD_AMPLIFIER) ? obj.get(FIELD_AMPLIFIER).getAsInt() : 0;
-		Target target = obj.has(FIELD_TARGET) ? Target.valueOf(obj.get(FIELD_TARGET).getAsString().toUpperCase())
-				: Target.VICTIM;
+		String entity = obj.get(FIELD_ENTITY).getAsString();
 
-		return new ApplyPotionEffectAction(potion, duration, amplifier, target);
+		CtxKey<?> key;
+		if (entity.equals(CtxKeys.TRUE_SOURCE.getId())) {
+			key = CtxKeys.TRUE_SOURCE;
+		} else if (entity.equals(CtxKeys.DAMAGED_ENTITY.getId())) {
+			key = CtxKeys.DAMAGED_ENTITY;
+		} else if (entity.equals(CtxKeys.PLAYER.getId())) {
+			key = CtxKeys.PLAYER;
+		} else if (entity.equals(CtxKeys.IMMEDIATE_SOURCE.getId())) {
+			key = CtxKeys.IMMEDIATE_SOURCE;
+		} else {
+			throw new IllegalArgumentException("Unknown entity context: " + entity);
+		}
+
+		return new ApplyPotionEffectAction(potion, duration, amplifier, key);
 	}
 }
