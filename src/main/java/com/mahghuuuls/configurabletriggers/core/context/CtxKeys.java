@@ -15,6 +15,19 @@ public final class CtxKeys {
 	public static final CtxKey<Integer> VICTIM_ENTITY_ID = new CtxKey<>("victim_entity_id");
 	public static final CtxKey<Object> IMMEDIATE_SOURCE = new CtxKey<>("immediate_source");
 
+	// Keys register themselves in CtxKey when instantiated
+
+	/**
+	 * Returns the {@link CtxKey} associated with the given id.
+	 *
+	 * @param id the context id as used in JSON
+	 * @return the matching {@link CtxKey}
+	 * @throws IllegalArgumentException if the id is not recognised
+	 */
+	public static CtxKey<?> getKeyFromId(String id) {
+		return CtxKey.forId(id);
+	}
+
 	private CtxKeys() {
 	}
 }

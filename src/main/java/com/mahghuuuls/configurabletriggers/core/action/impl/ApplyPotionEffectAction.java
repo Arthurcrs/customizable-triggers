@@ -46,15 +46,15 @@ public final class ApplyPotionEffectAction implements IAction {
 	public static ApplyPotionEffectAction fromJson(JsonObject obj) {
 
 		if (!obj.has(FIELD_ENTITY)) {
-			throw new IllegalArgumentException("Action is missing required field " + FIELD_ENTITY);
+			throw new IllegalArgumentException("Action is missing required field: " + FIELD_ENTITY);
 		}
 
 		if (!obj.has(FIELD_DURATION)) {
-			throw new IllegalArgumentException("Action is missing required field " + FIELD_DURATION);
+			throw new IllegalArgumentException("Action is missing required field: " + FIELD_DURATION);
 		}
 
 		if (!obj.has(FIELD_POTION)) {
-			throw new IllegalArgumentException("Action is missing required field " + FIELD_POTION);
+			throw new IllegalArgumentException("Action is missing required field: " + FIELD_POTION);
 		}
 
 		Potion potion = Potion.REGISTRY.getObject(new ResourceLocation(obj.get(FIELD_POTION).getAsString()));
@@ -62,18 +62,7 @@ public final class ApplyPotionEffectAction implements IAction {
 		int amplifier = obj.has(FIELD_AMPLIFIER) ? obj.get(FIELD_AMPLIFIER).getAsInt() : 0;
 		String entity = obj.get(FIELD_ENTITY).getAsString();
 
-		CtxKey<?> key;
-		if (entity.equals(CtxKeys.TRUE_SOURCE.getId())) {
-			key = CtxKeys.TRUE_SOURCE;
-		} else if (entity.equals(CtxKeys.DAMAGED_ENTITY.getId())) {
-			key = CtxKeys.DAMAGED_ENTITY;
-		} else if (entity.equals(CtxKeys.PLAYER.getId())) {
-			key = CtxKeys.PLAYER;
-		} else if (entity.equals(CtxKeys.IMMEDIATE_SOURCE.getId())) {
-			key = CtxKeys.IMMEDIATE_SOURCE;
-		} else {
-			throw new IllegalArgumentException("Unknown entity context: " + entity);
-		}
+		CtxKey<?> key = CtxKeys.getKeyFromId(entity);
 
 		return new ApplyPotionEffectAction(potion, duration, amplifier, key);
 	}
