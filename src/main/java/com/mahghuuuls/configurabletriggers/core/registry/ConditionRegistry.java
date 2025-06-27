@@ -135,10 +135,10 @@ public final class ConditionRegistry {
 		// Any RuntimeException from the factory will propagate up.
 		ICondition base = factory.apply(jsonObj);
 
-		// Check for the optional "value" field to determine if the condition's result
+		// Check for the optional "result" field to determine if the condition's result
 		// should be inverted.
-		// If "value" is false, we wrap the base condition to negate its test result.
-		boolean expected = jsonObj.has("value") ? jsonObj.get("value").getAsBoolean() : true;
+		// If "result" is false, we wrap the base condition to negate its test result.
+		boolean expected = jsonObj.has("result") ? jsonObj.get("result").getAsBoolean() : true;
 
 		if (!expected) {
 			// Return a new ICondition that negates the result of the base condition.
