@@ -43,24 +43,24 @@ public final class ApplyPotionEffectAction implements IAction {
 		}
 	}
 
-	public static ApplyPotionEffectAction fromJson(JsonObject obj) {
+	public static ApplyPotionEffectAction fromJson(JsonObject jsonObj) {
 
-		if (!obj.has(FIELD_ENTITY)) {
+		if (!jsonObj.has(FIELD_ENTITY)) {
 			throw new IllegalArgumentException("Action is missing required field: " + FIELD_ENTITY);
 		}
 
-		if (!obj.has(FIELD_DURATION)) {
+		if (!jsonObj.has(FIELD_DURATION)) {
 			throw new IllegalArgumentException("Action is missing required field: " + FIELD_DURATION);
 		}
 
-		if (!obj.has(FIELD_POTION)) {
+		if (!jsonObj.has(FIELD_POTION)) {
 			throw new IllegalArgumentException("Action is missing required field: " + FIELD_POTION);
 		}
 
-		Potion potion = Potion.REGISTRY.getObject(new ResourceLocation(obj.get(FIELD_POTION).getAsString()));
-		int duration = obj.get(FIELD_DURATION).getAsInt();
-		int amplifier = obj.has(FIELD_AMPLIFIER) ? obj.get(FIELD_AMPLIFIER).getAsInt() : 0;
-		String entity = obj.get(FIELD_ENTITY).getAsString();
+		Potion potion = Potion.REGISTRY.getObject(new ResourceLocation(jsonObj.get(FIELD_POTION).getAsString()));
+		int duration = jsonObj.get(FIELD_DURATION).getAsInt();
+		int amplifier = jsonObj.has(FIELD_AMPLIFIER) ? jsonObj.get(FIELD_AMPLIFIER).getAsInt() : 0;
+		String entity = jsonObj.get(FIELD_ENTITY).getAsString();
 
 		CtxKey<?> key = CtxKeys.getKeyFromId(entity);
 

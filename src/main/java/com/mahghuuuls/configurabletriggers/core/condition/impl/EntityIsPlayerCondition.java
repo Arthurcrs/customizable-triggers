@@ -24,13 +24,13 @@ public final class EntityIsPlayerCondition implements ICondition {
 		return ctx.get(entityKey, Object.class) instanceof EntityPlayer;
 	}
 
-	public static EntityIsPlayerCondition fromJson(JsonObject obj) {
+	public static EntityIsPlayerCondition fromJson(JsonObject jsonObj) {
 
-		if (!obj.has(FIELD_ENTITY)) {
+		if (!jsonObj.has(FIELD_ENTITY)) {
 			throw new IllegalArgumentException("Condition is missing required field: " + FIELD_ENTITY);
 		}
 
-		String entityName = obj.get(FIELD_ENTITY).getAsString();
+		String entityName = jsonObj.get(FIELD_ENTITY).getAsString();
 
 		CtxKey<?> key = CtxKeys.getKeyFromId(entityName);
 

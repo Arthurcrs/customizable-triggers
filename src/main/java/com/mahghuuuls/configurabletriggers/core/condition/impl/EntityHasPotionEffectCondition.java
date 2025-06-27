@@ -32,17 +32,17 @@ public final class EntityHasPotionEffectCondition implements ICondition {
 		return entity.getActivePotionEffect(potion) != null;
 	}
 
-	public static EntityHasPotionEffectCondition fromJson(JsonObject obj) {
-		if (!obj.has(FIELD_EFFECT)) {
+	public static EntityHasPotionEffectCondition fromJson(JsonObject jsonObj) {
+		if (!jsonObj.has(FIELD_EFFECT)) {
 			throw new IllegalArgumentException("Condition is missing required field: " + FIELD_EFFECT);
 		}
-		if (!obj.has(FIELD_ENTITY)) {
+		if (!jsonObj.has(FIELD_ENTITY)) {
 			throw new IllegalArgumentException("Condition is missing required field: " + FIELD_ENTITY);
 		}
 
-		String effectName = obj.get(FIELD_EFFECT).getAsString();
+		String effectName = jsonObj.get(FIELD_EFFECT).getAsString();
 		Potion potionEffect = Potion.REGISTRY.getObject(new ResourceLocation(effectName));
-		String entity = obj.get(FIELD_ENTITY).getAsString();
+		String entity = jsonObj.get(FIELD_ENTITY).getAsString();
 
 		CtxKey<?> key = CtxKeys.getKeyFromId(entity);
 

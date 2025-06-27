@@ -30,6 +30,7 @@ public class ConfigurableTriggersMod {
 			File triggersJsonFile = new File(e.getModConfigurationDirectory(), "Configurable Triggers/triggers.json");
 			List<ITrigger> triggers = TriggerJsonLoader.loadAll(triggersJsonFile);
 			triggers.forEach(ITrigger::register);
+			CTLogger.info("Registered {} triggers from configuration", triggers.size());
 		} catch (Exception ex) {
 			CTLogger.error("Failed to load triggers.json", ex);
 		}

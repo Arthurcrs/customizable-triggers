@@ -26,11 +26,11 @@ public final class PercentChanceCondition implements ICondition {
 		return roll <= percentChance;
 	}
 
-	public static PercentChanceCondition fromJson(JsonObject obj) {
-		if (!obj.has(FIELD_CHANCE)) {
+	public static PercentChanceCondition fromJson(JsonObject jsonObj) {
+		if (!jsonObj.has(FIELD_CHANCE)) {
 			throw new IllegalArgumentException("Condition is missing required field " + FIELD_CHANCE);
 		}
-		double percentChance = obj.get(FIELD_CHANCE).getAsDouble();
+		double percentChance = jsonObj.get(FIELD_CHANCE).getAsDouble();
 		return new PercentChanceCondition(percentChance);
 	}
 }

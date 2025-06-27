@@ -56,8 +56,10 @@ public abstract class Trigger implements ITrigger {
 	 */
 	protected Trigger(String name, List<ICondition> conditions, List<IAction> actions) {
 		this.name = name;
-		this.conditions = conditions == null ? java.util.Collections.emptyList() : conditions;
-		this.actions = actions == null ? java.util.Collections.emptyList() : actions;
+		this.conditions = conditions == null ? java.util.Collections.emptyList()
+				: java.util.Collections.unmodifiableList(new java.util.ArrayList<>(conditions));
+		this.actions = actions == null ? java.util.Collections.emptyList()
+				: java.util.Collections.unmodifiableList(new java.util.ArrayList<>(actions));
 	}
 
 	/**
