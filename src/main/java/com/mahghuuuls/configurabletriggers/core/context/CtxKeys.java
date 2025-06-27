@@ -11,8 +11,6 @@ public final class CtxKeys {
 	public static final CtxKey<ItemStack> ATTACK_WEAPON = new CtxKey<>("attack_weapon");
 	public static final CtxKey<Float> DAMAGE_AMOUNT = new CtxKey<>("damage");
 	public static final CtxKey<String> DAMAGE_TYPE = new CtxKey<>("damage_type");
-	public static final CtxKey<Integer> ATTACKER_ENTITY_ID = new CtxKey<>("attacker_entity_id");
-	public static final CtxKey<Integer> VICTIM_ENTITY_ID = new CtxKey<>("victim_entity_id");
 	public static final CtxKey<Object> IMMEDIATE_SOURCE = new CtxKey<>("immediate_source");
 
 	// Keys register themselves in CtxKey when instantiated
@@ -22,7 +20,7 @@ public final class CtxKeys {
 	 *
 	 * @param id the context id as used in JSON
 	 * @return the matching {@link CtxKey}
-	 * @throws IllegalArgumentException if the id is not recognised
+	 * @throws IllegalArgumentException if the id is not recognized
 	 */
 	public static CtxKey<?> getKeyFromId(String id) {
 		return CtxKey.forId(id);

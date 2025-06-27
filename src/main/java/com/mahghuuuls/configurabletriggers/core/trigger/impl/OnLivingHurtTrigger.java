@@ -125,7 +125,6 @@ public final class OnLivingHurtTrigger extends Trigger {
 			EntityLivingBase livingAttacker = (EntityLivingBase) attacker;
 			ctxBuilder.put(CtxKeys.ATTACK_WEAPON, livingAttacker.getHeldItemMainhand()); // The item held by the
 																							// attacker.
-			ctxBuilder.put(CtxKeys.ATTACKER_ENTITY_ID, livingAttacker.getEntityId()); // The entity ID of the attacker.
 		}
 
 		Context ctx = ctxBuilder.build(); // Create the immutable context.
