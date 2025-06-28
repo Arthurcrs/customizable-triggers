@@ -1,8 +1,11 @@
 package com.mahghuuuls.configurabletriggers.core.context;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.math.BlockPos;
 
 public final class CtxKeys {
 	public static final CtxKey<EntityPlayer> PLAYER = new CtxKey<>("player");
@@ -13,6 +16,9 @@ public final class CtxKeys {
 	public static final CtxKey<Float> DAMAGE_AMOUNT = new CtxKey<>("damage");
 	public static final CtxKey<String> DAMAGE_TYPE = new CtxKey<>("damage_type");
 	public static final CtxKey<Object> IMMEDIATE_SOURCE = new CtxKey<>("immediate_source");
+	public static final CtxKey<PotionEffect> POTION_EFFECT = new CtxKey<>("potion_effect");
+	public static final CtxKey<IBlockState> BLOCK_STATE = new CtxKey<>("block_state");
+	public static final CtxKey<BlockPos> BLOCK_POS = new CtxKey<>("block_pos");
 
 	// Keys register themselves in CtxKey when instantiated
 
