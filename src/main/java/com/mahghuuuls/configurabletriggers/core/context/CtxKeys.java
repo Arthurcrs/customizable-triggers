@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public final class CtxKeys {
 	public static final CtxKey<EntityPlayer> PLAYER = new CtxKey<>("player");
+	public static final CtxKey<EntityLivingBase> ENTITY = new CtxKey<>("entity");
 	public static final CtxKey<EntityLivingBase> DAMAGED_ENTITY = new CtxKey<>("victim");
 	public static final CtxKey<Object> TRUE_SOURCE = new CtxKey<>("attacker");
 	public static final CtxKey<ItemStack> ATTACK_WEAPON = new CtxKey<>("attack_weapon");
